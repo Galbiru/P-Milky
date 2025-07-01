@@ -1,1 +1,330 @@
-# P-Milky
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Milky 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    
+    <style>
+        /* PALET WARNA: CREAMY CHEESE */
+        body {
+            background-color: #FFFBEB; /* Fallback */
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FBBF24' fill-opacity='0.1'%3E%3Cpath d='M80 0H0v80h80V0zM40 40c0 22.09 17.91 40 40 40V40H40zM0 40c0-22.09 17.91-40 40-40v40H0z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+                                linear-gradient(135deg, #FFFBEB 0%, #FDE68A 100%);
+            overflow: hidden;
+            transition: background-image 0.7s ease-in-out;
+        }
+
+        /* Halaman Selamat Datang */
+        #welcome-page { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 80vh; color: #78350F; text-align: center; }
+        #welcome-page h2 { font-size: 1.5rem; font-weight: 500; text-shadow: 0 1px 2px rgba(255,255,255,0.7); }
+        #welcome-page .welcome-title { font-family: 'Georgia', 'Times New Roman', serif; font-size: 3rem; font-weight: 700; color: #9A3412; margin: 1rem 0 2rem 0; }
+        #start-btn { background-image: linear-gradient(to right, #FBBF24 0%, #F59E0B 51%, #FBBF24 100%); background-size: 200% auto; color: #422006; padding: 1rem 2rem; border: none; border-radius: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.5s; box-shadow: 0 4px 15px 0 rgba(120, 53, 15, 0.3); }
+        #start-btn:hover { background-position: right center; }
+
+        /* Tampilan Utama */
+        #main-view {
+            display: none;
+            opacity: 0;
+            padding-top: 20px; /* Sedikit padding untuk memberi napas di atas */
+        }
+        
+        .main-title {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #9A3412;
+            text-shadow: 2px 2px 4px rgba(255, 251, 235,0.8);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* === PERUBAHAN CSS: MENGEMBALIKAN POSISI WAKTU KE SEMULA === */
+        #datetime {
+            text-align: center; /* Posisi di tengah */
+            margin-bottom: 0.5rem; /* Jarak ke judul di bawahnya */
+            font-size: 1rem;
+            color: #78350F;
+            font-weight: 600;
+            background-color: rgba(255,255,255,0.4);
+            backdrop-filter: blur(2px);
+            padding: 6px 10px;
+            border-radius: 8px;
+            display: inline-block; /* Agar background pas dengan teks */
+        }
+        /* Menggunakan div tambahan untuk centering */
+        .datetime-container {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        /* === AKHIR PERUBAHAN CSS === */
+        
+        .users-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1.5rem; 
+            margin-top: 1.5rem; /* Menambah jarak dari judul */
+            justify-items: center; 
+        }
+
+        /* Tombol User 3D */
+        .user-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            padding: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #422006;
+            text-align: center;
+            background-image: linear-gradient(to top, #F59E0B 0%, #FBBF24 100%);
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+            box-shadow: 0px 8px 0px #B45309, 0 12px 20px rgba(0,0,0,0.2);
+        }
+        .user-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 11px 0px #B45309, 0 15px 25px rgba(0,0,0,0.25);
+        }
+        .user-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0px 0px 0px #B45309, 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Konten User */
+        .content-container { padding: 1rem; box-sizing: border-box; background-color: rgba(255,253,248,0.1); backdrop-filter: blur(5px); border-radius: 16px; border: 1px solid rgba(255,255,255,0.3); }
+        .back-btn { display: block; width: 100%; padding: 0.75rem; margin-bottom: 1rem; background-color: #FEF3C7; color: #78350F; border: 1px solid #FDE68A; border-radius: 10px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .back-btn:hover { background-color: #FDE68A; }
+        
+        .number-grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+        .number-btn { display: flex; aspect-ratio: 1; align-items: center; justify-content: center; font-weight: 500; font-size: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; padding: 0.25rem; background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #FFFBEB; text-decoration: none; }
+        .number-btn:hover { transform: translateY(-2px); background-color: rgba(255,255,255,0.3); }
+        .number-btn.disabled { background-color: rgba(161, 98, 7, 0.5); border-color: rgba(161, 98, 7, 0.7); color: #FEF3C7; cursor: not-allowed; }
+        .number-btn.clicked { background-color: #9A3412; border-color: #78350F; color: #FDE68A; }
+        .number-btn.clicked:hover { background-color: #B45309; }
+        
+        .fade-transition { transition: opacity 0.5s ease-in-out; }
+
+        /* Tombol WhatsApp */
+        .whatsapp-button { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; border-radius: 50%; padding: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); transition: background-color 0.3s; z-index: 1000; }
+        .whatsapp-button img { width: 30px; height: 30px; }
+        .whatsapp-button:hover { background-color: #128C7E; }
+    </style>
+</head>
+<body class="min-h-screen p-4">
+    <div class="max-w-md mx-auto">
+        <div id="welcome-page" class="fade-transition" style="opacity: 1;">
+            <h2>WELCOME TO</h2>
+            <h1 class="welcome-title">PROJECT MILKY 2025</h1>
+            <button id="start-btn">PRESS START TO CONTINUE</button>
+        </div>
+        
+        <div id="main-view" class="fade-transition">
+             <div class="datetime-container">
+                <div id="datetime"></div>
+            </div>
+            <h1 class="main-title">PROJECT MILKY 2025</h1>
+            <div id="user-buttons-container" class="users-grid"></div>
+        </div>
+        
+        <div id="content-display-area"></div>
+    </div>
+    
+    <a href="https://wa.me/6289668386077" target="_blank" id="whatsapp-button" class="whatsapp-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let clickedNumbers = JSON.parse(localStorage.getItem('clickedNumbers')) || [];
+            let activeContentId = null;
+            let isAnimating = false;
+
+            const originalBodyBg = document.body.style.backgroundImage;
+            const linesPattern = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23F59E0B' fill-opacity='0.2'%3E%3Cpath d='M30 60C13.43 60 0 46.57 0 30S13.43 0 30 0s30 13.43 30 30-13.43 30-30 30zM0 30C0 13.43 13.43 0 30 0s30 13.43 30 30c0 1.06-.07 2.1-.18 3.13C52.42 27.6 44.47 22 35 22s-17.42 5.6-19.82 11.13C15.07 32.1 15 31.06 15 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`;
+
+            const users = [
+                 { id: 'user1', name: 'Rondang', startNum: 35033, links: [] },
+                 { id: 'user2', name: 'Sulastri', startNum: 35133, links: [] },
+                 { id: 'user3', name: 'Ninik', startNum: 35233, links: [] },
+                 { id: 'user4', name: 'Rani', startNum: 35333, links: [] },
+                 { id: 'user5', name: 'Neneng', startNum: 35433, links: [] },
+                 { id: 'user6', name: 'Reni', startNum: 35533, links: [] },
+                 { id: 'user7', name: 'BACKUP', startNum: 35633, links: [] },
+            ];
+
+            const welcomePage = document.getElementById('welcome-page');
+            const startBtn = document.getElementById('start-btn');
+            const mainView = document.getElementById('main-view');
+            const userButtonsContainer = document.getElementById('user-buttons-container');
+            const contentDisplayArea = document.getElementById('content-display-area');
+            const mainContainer = document.querySelector('.max-w-md');
+
+            function generateUserAssets(user) {
+                const userButton = document.createElement('button');
+                userButton.className = 'user-btn';
+                userButton.textContent = user.name;
+                userButton.dataset.target = user.id;
+                userButtonsContainer.appendChild(userButton);
+
+                let numberGridHTML = '';
+                for (let i = 0; i < 100; i++) {
+                    const num = user.startNum + i;
+                    const url = user.links[i] || '#';
+                    const isEnabled = user.links[i] ? '' : 'disabled';
+                    const isClicked = clickedNumbers.includes(String(num)) ? 'clicked' : '';
+                    numberGridHTML += `<a href="${url}" target="_blank" rel="noopener noreferrer" class="number-btn ${isEnabled} ${isClicked}">${num}</a>`;
+                }
+
+                const contentWrapper = document.createElement('div');
+                contentWrapper.id = user.id;
+                contentWrapper.className = 'content-container fade-transition';
+                contentWrapper.style.display = 'none';
+                contentWrapper.style.opacity = '0';
+                contentWrapper.innerHTML = `<button class="back-btn">← Back to Main Menu</button><div class="number-grid">${numberGridHTML}</div>`;
+                contentDisplayArea.appendChild(contentWrapper);
+            }
+
+            function showUserGridWithZoom(targetId, clickedButton) {
+                if (isAnimating) return;
+                isAnimating = true;
+                activeContentId = targetId;
+
+                const rect = clickedButton.getBoundingClientRect();
+                const zoomCircle = document.createElement('div');
+                zoomCircle.style.position = 'fixed';
+                zoomCircle.style.left = `${rect.left}px`;
+                zoomCircle.style.top = `${rect.top}px`;
+                zoomCircle.style.width = `${rect.width}px`;
+                zoomCircle.style.height = `${rect.height}px`;
+                zoomCircle.style.backgroundImage = window.getComputedStyle(clickedButton).backgroundImage;
+                zoomCircle.style.borderRadius = '16px';
+                zoomCircle.style.zIndex = '9999';
+                zoomCircle.style.transform = 'scale(1)';
+                zoomCircle.style.opacity = '1';
+                zoomCircle.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out, border-radius 0.6s ease-in-out';
+                document.body.appendChild(zoomCircle);
+
+                setTimeout(() => {
+                    zoomCircle.style.transform = 'scale(50)';
+                    zoomCircle.style.borderRadius = '0';
+                }, 20);
+
+                setTimeout(() => {
+                    mainView.style.display = 'none';
+                    const creamyGradient = `linear-gradient(135deg, #FBBF24 0%, #B45309 100%)`;
+                    document.body.style.backgroundImage = `${linesPattern}, ${creamyGradient}`;
+                    const contentToShow = document.getElementById(targetId);
+                    if (contentToShow) contentToShow.style.display = 'block';
+                }, 300);
+
+                setTimeout(() => {
+                    const contentToShow = document.getElementById(targetId);
+                    if (contentToShow) contentToShow.style.opacity = '1';
+                    zoomCircle.style.opacity = '0';
+                }, 600);
+
+                setTimeout(() => {
+                    zoomCircle.remove();
+                    isAnimating = false;
+                }, 1200);
+            }
+
+            function showMainView() {
+                if (isAnimating || !activeContentId) return;
+                isAnimating = true;
+
+                const activeContent = document.getElementById(activeContentId);
+                const targetButton = document.querySelector(`.user-btn[data-target="${activeContentId}"]`);
+                if (!targetButton) { isAnimating = false; return; }
+
+                const color = document.body.style.backgroundImage;
+                const zoomCircle = document.createElement('div');
+                zoomCircle.style.position = 'fixed';
+                zoomCircle.style.left = '0';
+                zoomCircle.style.top = '0';
+                zoomCircle.style.width = '100vw';
+                zoomCircle.style.height = '100vh';
+                zoomCircle.style.backgroundImage = color;
+                zoomCircle.style.zIndex = '9999';
+                zoomCircle.style.transition = 'all 0.7s cubic-bezier(0.5, 0, 0.75, 0)';
+                document.body.appendChild(zoomCircle);
+
+                requestAnimationFrame(() => {
+                    if (activeContent) {
+                        activeContent.style.display = 'none';
+                        activeContent.style.opacity = '0';
+                    }
+                    mainView.style.display = 'block';
+                    mainView.style.opacity = '1';
+                    document.body.style.backgroundImage = originalBodyBg;
+
+                    const rect = targetButton.getBoundingClientRect();
+                    zoomCircle.style.left = `${rect.left}px`;
+                    zoomCircle.style.top = `${rect.top}px`;
+                    zoomCircle.style.width = `${rect.width}px`;
+                    zoomCircle.style.height = `${rect.height}px`;
+                    zoomCircle.style.borderRadius = '16px';
+
+                    setTimeout(() => {
+                        zoomCircle.remove();
+                        isAnimating = false;
+                    }, 750);
+                });
+            }
+
+            function updateDateTime() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' };
+                document.getElementById('datetime').textContent = now.toLocaleString('id-ID', options);
+            }
+
+            mainContainer.addEventListener('click', function(event) {
+                const target = event.target.closest('.user-btn, .back-btn, a.number-btn');
+                if (!target || isAnimating) return;
+
+                if (target.matches('.user-btn')) {
+                    showUserGridWithZoom(target.dataset.target, target);
+                } else if (target.matches('.back-btn')) {
+                    showMainView();
+                } else if (target.matches('a.number-btn:not(.disabled)')) {
+                    const numberText = target.textContent.trim();
+                    target.classList.add('clicked');
+                    if (!clickedNumbers.includes(numberText)) {
+                        clickedNumbers.push(numberText);
+                        localStorage.setItem('clickedNumbers', JSON.stringify(clickedNumbers));
+                    }
+                } else if (target.matches('a.number-btn.disabled')) {
+                    event.preventDefault();
+                    alert('No link available for this number.');
+                }
+            });
+
+            users.forEach(generateUserAssets);
+
+            startBtn.addEventListener('click', function() {
+                if(isAnimating) return; isAnimating = true;
+                welcomePage.style.opacity = '0';
+                setTimeout(() => {
+                    welcomePage.style.display = 'none';
+                    mainView.style.display = 'block';
+                    setTimeout(() => { mainView.style.opacity = '1'; isAnimating = false; }, 20);
+                }, 500);
+            });
+
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+        });
+    </script>
+</body>
+</html>
