@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Milky 2025</title>
+    <title>Project Milky 2025 (Logo Fixed)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,117 +11,66 @@
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
     
     <style>
-        /* PALET WARNA: CREAMY CHEESE */
+        /* PALET WARNA BARU: BIRU LUCU */
         body {
-            background-color: #FFFBEB; /* Fallback */
-            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FBBF24' fill-opacity='0.1'%3E%3Cpath d='M80 0H0v80h80V0zM40 40c0 22.09 17.91 40 40 40V40H40zM0 40c0-22.09 17.91-40 40-40v40H0z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-                                linear-gradient(135deg, #FFFBEB 0%, #FDE68A 100%);
+            background-color: #ade8f4; /* Fallback */
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2300b4d8' fill-opacity='0.1'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E"), 
+                              linear-gradient(135deg, #e0f7fa 0%, #ade8f4 100%);
             overflow: hidden;
             transition: background-image 0.7s ease-in-out;
         }
 
+        /* CSS untuk Logo di Kiri Atas */
+        #logo-container {
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            z-index: 1001; /* Pastikan di atas elemen lain */
+        }
+        #logo-container img {
+            height: 45px; /* Sesuaikan ukuran logo */
+            width: auto;
+        }
+
         /* Halaman Selamat Datang */
-        #welcome-page { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 80vh; color: #78350F; text-align: center; }
+        #welcome-page { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 80vh; color: #023e8a; text-align: center; }
         #welcome-page h2 { font-size: 1.5rem; font-weight: 500; text-shadow: 0 1px 2px rgba(255,255,255,0.7); }
-        #welcome-page .welcome-title { font-family: 'Georgia', 'Times New Roman', serif; font-size: 3rem; font-weight: 700; color: #9A3412; margin: 1rem 0 2rem 0; }
-        #start-btn { background-image: linear-gradient(to right, #FBBF24 0%, #F59E0B 51%, #FBBF24 100%); background-size: 200% auto; color: #422006; padding: 1rem 2rem; border: none; border-radius: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.5s; box-shadow: 0 4px 15px 0 rgba(120, 53, 15, 0.3); }
+        #welcome-page .welcome-title { font-family: 'Georgia', 'Times New Roman', serif; font-size: 3rem; font-weight: 700; color: #0077b6; margin: 1rem 0 2rem 0; }
+        #start-btn { background-image: linear-gradient(to right, #00b4d8 0%, #0077b6 51%, #00b4d8 100%); background-size: 200% auto; color: white; padding: 1rem 2rem; border: none; border-radius: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.5s; box-shadow: 0 4px 15px 0 rgba(2, 62, 138, 0.3); }
         #start-btn:hover { background-position: right center; }
 
         /* Tampilan Utama */
-        #main-view {
-            display: none;
-            opacity: 0;
-            padding-top: 20px; /* Sedikit padding untuk memberi napas di atas */
-        }
-        
-        .main-title {
-            font-family: 'Bubblegum Sans', cursive;
-            font-size: 3rem;
-            font-weight: 400;
-            color: #9A3412;
-            text-shadow: 2px 2px 4px rgba(255, 251, 235,0.8);
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        /* === PERUBAHAN CSS: MENGEMBALIKAN POSISI WAKTU KE SEMULA === */
-        #datetime {
-            text-align: center; /* Posisi di tengah */
-            margin-bottom: 0.5rem; /* Jarak ke judul di bawahnya */
-            font-size: 1rem;
-            color: #78350F;
-            font-weight: 600;
-            background-color: rgba(255,255,255,0.4);
-            backdrop-filter: blur(2px);
-            padding: 6px 10px;
-            border-radius: 8px;
-            display: inline-block; /* Agar background pas dengan teks */
-        }
-        /* Menggunakan div tambahan untuk centering */
-        .datetime-container {
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        /* === AKHIR PERUBAHAN CSS === */
-        
-        .users-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 1.5rem; 
-            margin-top: 1.5rem; /* Menambah jarak dari judul */
-            justify-items: center; 
-        }
-
-        /* Tombol User 3D */
-        .user-btn {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100px;
-            height: 100px;
-            padding: 0.5rem;
-            font-weight: 600;
-            font-size: 1rem;
-            color: #422006;
-            text-align: center;
-            background-image: linear-gradient(to top, #F59E0B 0%, #FBBF24 100%);
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
-            box-shadow: 0px 8px 0px #B45309, 0 12px 20px rgba(0,0,0,0.2);
-        }
-        .user-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0px 11px 0px #B45309, 0 15px 25px rgba(0,0,0,0.25);
-        }
-        .user-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0px 0px 0px #B45309, 0 5px 10px rgba(0,0,0,0.2);
-        }
+        #main-view { display: none; opacity: 0; padding-top: 20px; }
+        .main-title { font-family: 'Bubblegum Sans', cursive; font-size: 3rem; font-weight: 400; color: #0077b6; text-shadow: 2px 2px 4px rgba(202, 240, 248, 0.8); text-align: center; margin-bottom: 1.5rem; }
+        .datetime-container { text-align: center; margin-bottom: 0.5rem; }
+        #datetime { text-align: center; margin-bottom: 0.5rem; font-size: 1rem; color: #023e8a; font-weight: 600; background-color: rgba(255,255,255,0.4); backdrop-filter: blur(2px); padding: 6px 10px; border-radius: 8px; display: inline-block; }
+        .users-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; justify-items: center; }
+        .user-btn { position: relative; display: flex; align-items: center; justify-content: center; width: 100px; height: 100px; padding: 0.5rem; font-weight: 600; font-size: 1rem; color: white; text-align: center; background-image: linear-gradient(to top, #0077b6 0%, #00b4d8 100%); border: none; border-radius: 16px; cursor: pointer; transition: transform 0.1s ease-out, box-shadow 0.1s ease-out; box-shadow: 0px 8px 0px #023e8a, 0 12px 20px rgba(0,0,0,0.2); }
+        .user-btn:hover { transform: translateY(-3px); box-shadow: 0px 11px 0px #023e8a, 0 15px 25px rgba(0,0,0,0.25); }
+        .user-btn:active { transform: translateY(5px); box-shadow: 0px 0px 0px #023e8a, 0 5px 10px rgba(0,0,0,0.2); }
 
         /* Konten User */
-        .content-container { padding: 1rem; box-sizing: border-box; background-color: rgba(255,253,248,0.1); backdrop-filter: blur(5px); border-radius: 16px; border: 1px solid rgba(255,255,255,0.3); }
-        .back-btn { display: block; width: 100%; padding: 0.75rem; margin-bottom: 1rem; background-color: #FEF3C7; color: #78350F; border: 1px solid #FDE68A; border-radius: 10px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .back-btn:hover { background-color: #FDE68A; }
-        
+        .content-container { padding: 1rem; box-sizing: border-box; background-color: rgba(0, 180, 216, 0.1); backdrop-filter: blur(5px); border-radius: 16px; border: 1px solid rgba(255,255,255,0.3); }
+        .back-btn { display: block; width: 100%; padding: 0.75rem; margin-bottom: 1rem; background-color: #caf0f8; color: #023e8a; border: 1px solid #90e0ef; border-radius: 10px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .back-btn:hover { background-color: #ade8f4; }
         .number-grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
-        .number-btn { display: flex; aspect-ratio: 1; align-items: center; justify-content: center; font-weight: 500; font-size: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; padding: 0.25rem; background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #FFFBEB; text-decoration: none; }
+        .number-btn { display: flex; aspect-ratio: 1; align-items: center; justify-content: center; font-weight: 500; font-size: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; padding: 0.25rem; background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #f1f1f1; text-decoration: none; }
         .number-btn:hover { transform: translateY(-2px); background-color: rgba(255,255,255,0.3); }
-        .number-btn.disabled { background-color: rgba(161, 98, 7, 0.5); border-color: rgba(161, 98, 7, 0.7); color: #FEF3C7; cursor: not-allowed; }
-        .number-btn.clicked { background-color: #9A3412; border-color: #78350F; color: #FDE68A; }
-        .number-btn.clicked:hover { background-color: #B45309; }
-        
+        .number-btn.disabled { background-color: rgba(144, 224, 239, 0.5); border-color: rgba(144, 224, 239, 0.7); color: #caf0f8; cursor: not-allowed; }
+        .number-btn.clicked { background-color: #03045e; border-color: #023e8a; color: #90e0ef; }
+        .number-btn.clicked:hover { background-color: #023e8a; }
         .fade-transition { transition: opacity 0.5s ease-in-out; }
-
-        /* Tombol WhatsApp */
         .whatsapp-button { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; border-radius: 50%; padding: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); transition: background-color 0.3s; z-index: 1000; }
         .whatsapp-button img { width: 30px; height: 30px; }
         .whatsapp-button:hover { background-color: #128C7E; }
     </style>
 </head>
 <body class="min-h-screen p-4">
+    
+    <div id="logo-container">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAABCCAMAAACY9yNqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNQTFRF////f39/DAwMREREf39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/DAwMBAQEAAAA////f39/UVZzrgAAA RJREFUeNrs3NtygyAQBVCESSi4/v9vuRddhCi16gZ2dM4595x/DhgZWVlZWVlZWdn//gqWnC1Hvrf35L2HsbZ3A3b3IHY3w1Y/dnd/slYf7e6eZG08wN19yNpcgL27H0uZN7D38LNqQe/uS9anAPfwe2rB9u5+rGf34e/uRdrSg8/djbClB527K1m3Auzt3Yh1G8bendo/sXlj8PYQax9295C18Qh7D2PtxrB3AWt3Yew9jLVH2HsPa4+x9h7WzsbYw1gbH2MPY20sYw9jbXzM7mY2YewtY29j7J3MlsPee9jaL4e9t7B0P8bezdB9GHsXQ/Vh7B2E6kPYOwg1p7B1EPYOtY7uxtpBWPsHaQaxdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2EHIXYQahdhBqF2GEOYewhtB7CDkIYQ9jbAwsPYWwMLD2FkDCw9hZAzMHYWYMXYWYcLE2FkICw9hJSwMPYSUsDD2ElLAw9hJSwMPYSUsDD2ElLAw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLAw9hJSwMPYSUsDD2ElLAw9hJSwMPYSUsDD2ElLAw9hJSwMPYSUsDD2ElLAw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLIw9hJSyMPYSUsjD2ElLAw9hJSwMPYSUsDD2ElLAw9hJSwMPYSUsDD2ElLAw9hZywMPYWY8LE2FkDMCw9hZgwsPYWYMLD2FkDMyw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYNLD2FmCyw9hZgssPYWYLLD2FmCyw9hZgssPYWYLLD2FmCyw9hZgssPYWYLLD2FmCyw9hZgssPYWYLLD2FmCyw9hZgssPYWYLLD2FmCyw9hZgssPYWYLLD2FmCyw9hZgssPYWYLLD2FmLCw9hZgwMPYSYsDA2FkDAw9hZgwsPYWXMLD2FkDCw9hZAwsPYWQMLE2FkDAw9hJCwMPYSQsDD2EkLAw9hJCwMPYSQsDD2EkLAw9hJCwMPYSQsDD2EkLAw9hJCwMPYSQsDD2EkLAw9hJCwMPYSQsDD2EkLAw9hJCwMPYSQsDD2EkLAw9hJCwMPYSQsDD2EkLAw9hJCwMPYSQsDD2EkLAw9hJCwMPYSQsDA2FkDAw9hZgwsPYWXMLD2FkLCw9hZgwMPYWYMLE2FkDCw9hZgwsPYWYsLD2FmDCw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYMLD2FmDCw9hZgwsPYWYMLD2FmLCw9hZgwsPYWYMLD2FmDCw9hZgwsPYWYMLD2FmDCw9hZgwsPYWYMLD2FmCyw9hZgksPYWYJLD2FmCSw9hZgksPYWYJLD2FmCSw9hZgksPYWYJLD2FmCSw9hZgksPYWYJLD2FmCSw9hZgksPYWYJLD2FmCSw9hZgksPYWYJLD2FmCSw9hZgksPYWYJLD2FmCyw9hZgksPYWQsDD2GEIg9hDCIsPYQwgLD2EMIiw9hDCIsPYQwiLD2EMIiw9hDCIsPYQwiLD2EMIiw9hDCIsPYQwiLD2EMIiw9hDCIsPYQwiLD2EMIiw9hDCIsPYQwiLD2EMIiw9hDCIsPYQwiLD2EMIiw9hDCIsPYQwiLD2EMIiw9hDCIsPYQwiLD2EMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMIiwMPYQwMLD2EMLD2EMIiw9hDCAsPYQwiLD2EMICw9hDCAsPYQwiLD2EMICw9hDCAsPYQwiLD2EMICw9hDCAsPYQwiLD2EMICw9hDCAsPYQwiLD2EMICw9hDCAsPYQwiLD2EMICw9hDCIsPYQwiLD2EMICw9hDCIsPYQwiLD2EMICw9hDCIsPYQwiLD2EMICw9hDCAsPYQwiLD2EMLD2EMICw9hDCwMPYQwsDA2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsDA2EMLCw9hDAwsPYQwMLD2EMDCw9hDAwsPYQwMLD2EMDCw9hDAwsPYQwMLD2EMDCw9hDAwsPYQwMLD2EMDCw9hDAwsPYQwMLD2EMDCw9hDAwsPYQwMLD2EMDCw9hDAwsPYQwMLD2EMDCw9hDAwsPYQwMLD2EMDCw9hDAwsPYQwMLD2EMDCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLAw9hDAwMPYQwMDD2EMDAw9hDAwMPYQwMDD2EMDAw9hDAwMPYQwMDD2EMDAw9hDAwMPYQwMDD2EMDAw9hDAwMPYQwMDD2EMDAw9hDAwMPYQwMDD2EMDAw9hDAwMPYQwMDD2EMDAw9hDAwMPYQwMDD2EMDAw9hDAwMPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2EMLCw9hDCwsPYQwsLD2ELCzsrKysrKysrK/AP8FGAAQyZp28bAtoAAAAASUVORK5CYII=" alt="Acorn Logo">
+    </div>
+    
     <div class="max-w-md mx-auto">
         <div id="welcome-page" class="fade-transition" style="opacity: 1;">
             <h2>WELCOME TO</h2>
@@ -130,7 +79,7 @@
         </div>
         
         <div id="main-view" class="fade-transition">
-             <div class="datetime-container">
+            <div class="datetime-container">
                 <div id="datetime"></div>
             </div>
             <h1 class="main-title">PROJECT MILKY 2025</h1>
@@ -151,17 +100,18 @@
             let isAnimating = false;
 
             const originalBodyBg = document.body.style.backgroundImage;
-            const linesPattern = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23F59E0B' fill-opacity='0.2'%3E%3Cpath d='M30 60C13.43 60 0 46.57 0 30S13.43 0 30 0s30 13.43 30 30-13.43 30-30 30zM0 30C0 13.43 13.43 0 30 0s30 13.43 30 30c0 1.06-.07 2.1-.18 3.13C52.42 27.6 44.47 22 35 22s-17.42 5.6-19.82 11.13C15.07 32.1 15 31.06 15 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`;
+            const plusPattern = `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23caf0f8' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M0 0h40v40H0V0zm20 18h20v4H20v20h-4V22H0v-4h16V0h4v18z'/%3E%3C/g%3E%3C/svg%3E")`;
 
             const users = [
-                 { id: 'user1', name: 'Rondang', startNum: 35033, links: [] },
-                 { id: 'user2', name: 'Sulastri', startNum: 35133, links: [] },
-                 { id: 'user3', name: 'Ninik', startNum: 35233, links: [] },
-                 { id: 'user4', name: 'Rani', startNum: 35333, links: [] },
-                 { id: 'user5', name: 'Neneng', startNum: 35433, links: [] },
-                 { id: 'user6', name: 'Reni', startNum: 35533, links: [] },
-                 { id: 'user7', name: 'BACKUP', startNum: 35633, links: [] },
+                { id: 'user1', name: 'Rondang', startNum: 35033, links: [] }, { id: 'user2', name: 'Sulastri', startNum: 35133, links: [] },
+                { id: 'user3', name: 'Ninik', startNum: 35233, links: [] }, { id: 'user4', name: 'Rani', startNum: 35333, links: [] },
+                { id: 'user5', name: 'Neneng', startNum: 35433, links: [] }, { id: 'user6', name: 'Reni', startNum: 35533, links: [] },
+                { id: 'user7', name: 'BACKUP', startNum: 35633, links: [] },
             ];
+            
+            users.forEach(user => {
+                for (let i = 0; i < 100; i++) { user.links.push(`https://example.com?id=${user.startNum + i}`); }
+            });
 
             const welcomePage = document.getElementById('welcome-page');
             const startBtn = document.getElementById('start-btn');
@@ -222,8 +172,9 @@
 
                 setTimeout(() => {
                     mainView.style.display = 'none';
-                    const creamyGradient = `linear-gradient(135deg, #FBBF24 0%, #B45309 100%)`;
-                    document.body.style.backgroundImage = `${linesPattern}, ${creamyGradient}`;
+                    const cuteBlueGradient = `linear-gradient(135deg, #00b4d8 0%, #0077b6 100%)`;
+                    document.body.style.backgroundImage = `${plusPattern}, ${cuteBlueGradient}`;
+                    
                     const contentToShow = document.getElementById(targetId);
                     if (contentToShow) contentToShow.style.display = 'block';
                 }, 300);
@@ -257,7 +208,7 @@
                 zoomCircle.style.height = '100vh';
                 zoomCircle.style.backgroundImage = color;
                 zoomCircle.style.zIndex = '9999';
-                zoomCircle.style.transition = 'all 0.7s cubic-bezier(0.5, 0, 0.75, 0)';
+                zoomCircle.style.transition = 'all 0.7s cubic-bezier(0.5, 0, 0.75, 0), border-radius 0.7s ease-in-out';
                 document.body.appendChild(zoomCircle);
 
                 requestAnimationFrame(() => {
@@ -275,7 +226,7 @@
                     zoomCircle.style.width = `${rect.width}px`;
                     zoomCircle.style.height = `${rect.height}px`;
                     zoomCircle.style.borderRadius = '16px';
-
+                    
                     setTimeout(() => {
                         zoomCircle.remove();
                         isAnimating = false;
@@ -284,27 +235,30 @@
             }
 
             function updateDateTime() {
-                const now = new Date();
+                 const now = new Date();
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' };
                 document.getElementById('datetime').textContent = now.toLocaleString('id-ID', options);
             }
-
+            
             mainContainer.addEventListener('click', function(event) {
                 const target = event.target.closest('.user-btn, .back-btn, a.number-btn');
                 if (!target || isAnimating) return;
 
                 if (target.matches('.user-btn')) {
                     showUserGridWithZoom(target.dataset.target, target);
-                } else if (target.matches('.back-btn')) {
+                } 
+                else if (target.matches('.back-btn')) {
                     showMainView();
-                } else if (target.matches('a.number-btn:not(.disabled)')) {
+                } 
+                else if (target.matches('a.number-btn:not(.disabled)')) {
                     const numberText = target.textContent.trim();
                     target.classList.add('clicked');
                     if (!clickedNumbers.includes(numberText)) {
                         clickedNumbers.push(numberText);
                         localStorage.setItem('clickedNumbers', JSON.stringify(clickedNumbers));
                     }
-                } else if (target.matches('a.number-btn.disabled')) {
+                }
+                else if (target.matches('a.number-btn.disabled')) {
                     event.preventDefault();
                     alert('No link available for this number.');
                 }
